@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Menu</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .menu-container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .menu-container h1 {
+      text-align: center;
+      color: #b83227;
+    }
+
+    .add-item-box {
+      background: #fff7ed;
+      padding: 22px;
+      border-radius: 12px;
+      margin: 25px 0;
+    }
+
+    .add-item-box input,
+    .add-item-box select,
+    .add-item-box textarea {
+      width: 100%;
+      padding: 11px;
+      margin: 7px 0 14px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    .add-item-box button {
+      background: #b83227;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .menu-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .menu-table th,
+    .menu-table td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    .menu-table th {
+      background: #b83227;
+      color: white;
+    }
+
+    .menu-table tr:nth-child(even) {
+      background: #fff7ed;
+    }
+
+    .status-message {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .menu-container {
+        padding: 10px;
+      }
+
+      .menu-table th,
+      .menu-table td {
+        padding: 7px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/menu.html">Menu</a>
+    <a href="/cart.html">Cart</a>
+    <a href="/order.html">Place Order</a>
+    <a href="/update.html">Update Food</a>
+    <a href="/delete.html">Delete Food</a>
+  </nav>
+
+  <main class="menu-container">
+    <h1>Our Food Menu</h1>
+    <p style="text-align:center">
+      Delicious food at affordable prices!
+    </p>
+
+    <section class="add-item-box">
+      <h2>Add a New Food Item</h2>
+
+      <form id="addFoodForm">
+        <label for="food_name">Food Name</label>
+        <input id="food_name" name="food_name"
+               placeholder="Enter food name" required>
+
+        <label for="category">Category</label>
+        <select id="category" name="category" required>
+          <option value="">Select category</option>
+          <option>Main Course</option>
+          <option>Fast Food</option>
+          <option>Fast food</option>
+          <option>Breakfast</option>
+          <option>Snacks</option>
+          <option>Dessert</option>
+          <option>Beverages</option>
+        </select>
+
+        <label for="price">Price (₹)</label>
+        <input id="price" name="price" type="number"
+               min="0" step="0.01" placeholder="Enter price" required>
+
+        <label for="description">Description</label>
+        <textarea id="description" name="description"
+                  placeholder="Enter food description"></textarea>
+
+        <label for="availability">Availability</label>
+        <select id="availability" name="availability">
+          <option value="true">Available</option>
+          <option value="false">Not Available</option>
+        </select>
+
+        <button type="submit">Add Food Item</button>
+        <p id="formMessage" class="status-message"></p>
+      </form>
+    </section>
+
+    <h2>Available Food Items</h2>
+
+    <div style="overflow-x:auto">
+      <table class="menu-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Food Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="foodList">
+          <tr>
+            <td colspan="7">Loading menu...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="menu.js"></script>
+</body>
+</html>

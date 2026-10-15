@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Charani Crave Corner | Shopping Cart</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <header class="navbar">
+        <a class="brand" href="index.html">🍽️ Charani Crave Corner</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a class="active" href="cart.html">Cart <span class="cart-count" id="cart-count">0</span></a>
+            <a href="order.html">Place Order</a>
+            <a href="update.html">Update Food</a>
+            <a href="delete.html">Delete Food</a>
+        </nav>
+    </header>
+    <main class="page-shell">
+        <div class="page-title">
+            <span class="eyebrow">ALMOST TIME TO EAT</span>
+            <h1>Your shopping cart</h1>
+            <p>Check your items before placing your order.</p>
+        </div>
+        <div id="cart-content" class="cart-layout"></div>
+        <p id="cart-message" class="notice" aria-live="polite"></p>
+    </main>
+    <footer>© 2026 Charani Crave Corner · Made with ❤️ for food lovers</footer>
+    <script src="common.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>

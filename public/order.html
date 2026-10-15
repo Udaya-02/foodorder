@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charani Crave Corner | Place Order</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <a class="brand" href="index.html">🍽️ Charani Crave Corner</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="cart.html">Cart <span class="cart-count">0</span></a>
+      <a class="active" href="order.html">Place Order</a>
+      <a href="update.html">Update Food</a>
+      <a href="delete.html">Delete Food</a>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <div class="page-title">
+      <span class="eyebrow">FRESH FOOD, HAPPY YOU</span>
+      <h1>Place Your Order</h1>
+      <p>Enter your delivery details to complete your order.</p>
+    </div>
+
+    <section class="order-panel">
+      <h2>Order Summary</h2>
+      <div id="order-summary">Loading your cart...</div>
+
+      <form id="orderForm">
+        <label for="customerName">Full Name</label>
+        <input id="customerName" name="customerName"
+          type="text" required placeholder="Enter your name">
+
+        <label for="phone">Phone Number</label>
+        <input id="phone" name="phone" type="tel"
+          pattern="[0-9]{10}" maxlength="10" required
+          placeholder="10-digit mobile number">
+
+        <label for="address">Delivery Address</label>
+        <textarea id="address" name="address"
+          rows="4" required placeholder="House number, street, city"></textarea>
+
+        <label for="payment">Payment Method</label>
+        <select id="payment" name="payment" required>
+          <option value="">Select payment method</option>
+          <option value="Cash on Delivery">Cash on Delivery</option>
+        </select>
+
+        <button type="submit" id="placeOrderBtn">
+          Place Order
+        </button>
+      </form>
+
+      <p id="orderMessage" class="notice" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer>© 2026 Charani Crave Corner · Made with ❤️ for food lovers</footer>
+
+  <script src="common.js"></script>
+  <script src="order.js"></script>
+</body>
+</html>

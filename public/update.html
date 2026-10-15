@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Update Food | Crave Corner</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .admin-form {
+      max-width: 520px;
+      margin: 40px auto;
+      padding: 25px;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 8px 25px #39251f18;
+    }
+    .admin-form input, .admin-form textarea,
+    .admin-form select {
+      width: 100%;
+      margin: 8px 0 15px;
+      padding: 12px;
+      box-sizing: border-box;
+    }
+    .admin-form label { font-weight: 600; }
+    .message { margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <main class="admin-form">
+    <h1>✏️ Update Food Item</h1>
+    <p>Enter the food ID to load its details.</p>
+
+    <form id="loadForm">
+      <label for="foodId">Food ID</label>
+      <input type="number" id="foodId" min="1" required>
+      <button type="submit">Load Food</button>
+    </form>
+
+    <form id="updateForm" hidden>
+      <label for="foodName">Food Name</label>
+      <input id="foodName" required>
+
+      <label for="category">Category</label>
+      <input id="category" required>
+
+      <label for="price">Price (₹)</label>
+      <input id="price" type="number" min="0"
+             step="0.01" required>
+
+      <label for="description">Description</label>
+      <textarea id="description" rows="3"></textarea>
+
+      <label for="availability">Availability</label>
+      <select id="availability">
+        <option value="true">Available</option>
+        <option value="false">Unavailable</option>
+      </select>
+
+      <button type="submit">Save Changes</button>
+    </form>
+
+    <p id="message" class="message" role="status"></p>
+    <p><a href="menu.html">← Back to Menu</a></p>
+  </main>
+
+  <script>
+    const loadForm = document.getElementById('loadForm');
+    const updateForm = document.getElementById('updateForm');
+    const message = document.getElementById('message');
+
+    loadForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      message.textContent = '';
+
+      const id = document.getElementById('foodId').value;
+
+      try {
+        const response = await fetch('/api/food/' + id);
+        const food = await response.json();
+
+        if (!response.ok) throw new Error(food.error);
+
+        document.getElementById('foodName').value = food.food_name;
+        document.getElementById('category').value = food.category;
+        document.getElementById('price').value = food.price;
+        document.getElementById('description').value =
+          food.description || '';
+        document.getElementById('availability').value =
+          food.availability ? 'true' : 'false';
+
+        updateForm.hidden = false;
+        message.textContent = 'Food loaded. Edit the fields below.';
+      } catch (err) {
+        updateForm.hidden = true;
+        message.textContent = err.message || 'Could not load food.';
+      }
+    });
+
+    updateForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      message.textContent = '';
+
+      const id = document.getElementById('foodId').value;
+
+      const data = {
+        food_name: document.getElementById('foodName').value.trim(),
+        category: document.getElementById('category').value.trim(),
+        price: document.getElementById('price').value,
+        description: document.getElementById('description').value,
+        availability:
+          document.getElementById('availability').value === 'true'
+      };
+
+      try {
+        const response = await fetch('/api/food/' + id, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error);
+
+        message.textContent = result.message;
+      } catch (err) {
+        message.textContent = err.message || 'Update failed.';
+      }
+    });
+  </script>
+</body>
+</html>
